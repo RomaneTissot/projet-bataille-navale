@@ -18,3 +18,16 @@ def test_tirer():
     g = Grille(3, 3)
     g.tirer(1, 2)
     assert g.grille[1 * 3 + 2] == g.touche
+
+
+def test_affichage_vide():
+    g = Grille(3, 4)
+    attendu = "~~~~\n~~~~\n~~~~"
+    assert str(g) == attendu
+
+
+def test_affichage_avec_tir():
+    g = Grille(3, 4)
+    g.tirer(1, 2)  # Tir sur la 2e ligne, 3e colonne
+    attendu = "~~~~\n~~x~\n~~~~"
+    assert str(g) == attendu
