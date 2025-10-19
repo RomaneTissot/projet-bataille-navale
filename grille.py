@@ -20,3 +20,11 @@ class Grille:
             fin = debut + self.nb_colonnes
             lignes.append("".join(self.grille[debut:fin]))
         return "\n".join(lignes)
+
+    def ajoute(self, bateau):
+        for (l, c) in bateau.positions:
+            if l < 0 or l >= self.nb_lignes or c < 0 or c >= self.nb_colonnes:
+                return
+        for (l, c) in bateau.positions:
+            idx = l * self.nb_colonnes + c
+            self.grille[idx] = "⛵"
