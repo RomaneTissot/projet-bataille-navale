@@ -1,5 +1,6 @@
 from grille import Grille
 from bateau import Bateau
+from types_bateaux import PorteAvion, Croiseur, Torpilleur, SousMarin
 
 
 def test_ajoute_horizontal_ok():
@@ -62,3 +63,39 @@ def test_coule_vertical_partiel():
     g.tirer(1, 1)
     g.tirer(2, 1)
     assert b.coule(g) is False
+
+
+def test_ajoute_porte_avion():
+    g = Grille(5, 5)
+    pa = PorteAvion(0, 0)
+    g.ajoute(pa)
+    for (l, c) in pa.positions:
+        indice = l * g.nb_colonnes + c
+        assert g.grille[indice] == pa.marque
+
+
+def test_ajoute_croiseur():
+    g = Grille(5, 5)
+    c = Croiseur(1, 0)
+    g.ajoute(c)
+    for (l, col) in c.positions:
+        indice = l * g.nb_colonnes + col
+        assert g.grille[indice] == c.marque
+
+
+def test_ajoute_torpilleur():
+    g = Grille(5, 5)
+    t = Torpilleur(2, 0)
+    g.ajoute(t)
+    for (l, col) in t.positions:
+        indice = l * g.nb_colonnes + col
+        assert g.grille[indice] == t.marque
+
+
+def test_ajoute_sous_marin():
+    g = Grille(5, 5)
+    sm = SousMarin(3, 0)
+    g.ajoute(sm)
+    for (l, col) in sm.positions:
+        indice = l * g.nb_colonnes + col
+        assert g.grille[indice] == sm.marque
