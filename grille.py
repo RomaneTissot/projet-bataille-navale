@@ -26,5 +26,5 @@ class Grille:
             if l < 0 or l >= self.nb_lignes or c < 0 or c >= self.nb_colonnes:
                 return
         for (l, c) in bateau.positions:
-            idx = l * self.nb_colonnes + c
-            self.grille[idx] = "⛵"
+            indice = l * self.nb_colonnes + c
+            self.grille[indice] = getattr(bateau, 'marque', "⛵")
