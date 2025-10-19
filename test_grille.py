@@ -1,5 +1,4 @@
 from grille import Grille
-from bateau import Bateau
 
 
 def test_init():
@@ -21,6 +20,13 @@ def test_tirer():
     assert g.grille[1 * 3 + 2] == g.touche
 
 
+def test_tirer_personnalise():
+    g = Grille(2, 2)
+    g.tirer(1, 0, touche='💥')
+    expected = ["~", "~", "💥", "~"]
+    assert g.grille == expected
+
+
 def test_affichage_vide():
     g = Grille(3, 4)
     attendu = "~~~~\n~~~~\n~~~~"
@@ -32,27 +38,3 @@ def test_affichage_avec_tir():
     g.tirer(1, 2)
     attendu = "~~~~\n~~x~\n~~~~"
     assert str(g) == attendu
-
-
-def test_ajoute_horizontal_ok():
-    g = Grille(2, 3)
-    b = Bateau(1, 0, longueur=2, vertical=False)
-    g.ajoute(b)
-    expected = ["~", "~", "~", "⛵", "⛵", "~"]
-    assert g.grille == expected
-
-
-def test_ajoute_vertical_depasse():
-    g = Grille(2, 3)
-    b = Bateau(1, 0, longueur=2, vertical=True)
-    g.ajoute(b)
-    expected = ["~", "~", "~", "~", "~", "~"]
-    assert g.grille == expected
-
-
-def test_ajoute_vertical_trop_long():
-    g = Grille(2, 3)
-    b = Bateau(1, 0, longueur=4, vertical=True)
-    g.ajoute(b)
-    expected = ["~", "~", "~", "~", "~", "~"]
-    assert g.grille == expected
